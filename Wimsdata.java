@@ -29,6 +29,10 @@ class Wimsdata {
 
         genBottles();
         genRacks();
+        genImports();
+        genExports();
+
+        return;
     }
 
     private static void genBottles() {
@@ -46,7 +50,7 @@ class Wimsdata {
                 list = Math.round((5 + (rand.nextDouble() * 120)) * 100.0) / 100.0;
                 retail = Math.round((5 + (list * 1.2)) * 100.0) / 100.0;
                 variety = 1000 + rand.nextInt(32);
-                branch = 1000 + rand.nextInt(120);;
+                branch = 1000 + rand.nextInt(120);
 
                 writer.write(String.valueOf(year) + ',' + String.valueOf(volume) + ',' + String.valueOf(alc) + ',' + String.valueOf(list) + ',' + String.valueOf(retail) + ',' + String.valueOf(variety) + ',' + String.valueOf(branch) + ',' + String.valueOf(imp) + ',');
 
@@ -77,7 +81,7 @@ class Wimsdata {
     }
 
     private static void genRacks() {
-        try{
+        try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("racks.csv"));
             Random rand = new Random();
 
@@ -101,6 +105,77 @@ class Wimsdata {
             }
 
             writer.close();
+        }
+        catch (Exception ex) {
+            System.err.println(ex);
+            System.exit(0);
+        }
+    }
+
+    private static void genImports() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("imports.csv"));
+            Random rand = new Random();
+
+            String ordered, arrived;
+            double cost;
+            int supplier, year, month, day;
+
+            for (int i = 0; i < imp; i++) {
+                year = 2020 + rand.nextInt(3);
+                month = 1 + rand.nextInt(12);
+
+                if (month == 2) {
+                    day = 1 + rand.nextInt(28);
+                }
+                else if (month == 4 || month == 6 || month == 9 || month == 11) {
+                    day = 1 + rand.nextInt(30);
+                }
+                else {
+                    day = 1 + rand.nextInt(31);
+                }
+
+                ordered = String.valueOf(year) + '/' + String.valueOf(month) + '/' + String.valueOf(day);
+                day += 5 + rand.nextInt(10);
+
+                if (day > 28 && month == 2) {
+                    month += 1;
+                    day -= 28;
+                }
+                else if (day > 30 && (month == 4 || month == 6 || month == 9 || month == 11)) {
+                    month += 1;
+                    day -= 30;
+                }
+                else if (day > 31) {
+                    if (month == 12) {
+                        year += 1;
+                        month = 0;
+                    }
+
+                    month += 1;
+                    day -= 31;
+                }
+
+                arrived = String.valueOf(year) + '/' + String.valueOf(month) + '/' + String.valueOf(day);
+                cost = Math.round((10 + (rand.nextDouble() * 20)) * 100.0) / 100.0;
+                supplier = 1000 + rand.nextInt(40);
+
+                writer.write(ordered + ',' + arrived + ',' + String.valueOf(cost) + ',' + String.valueOf(supplier));
+                writer.newLine();
+            }
+
+            writer.close();
+        }
+        catch (Exception ex) {
+            System.err.println(ex);
+            System.exit(0);
+        }
+    }
+
+    private static void genExports() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("exports.csv"));
+            Random rand = new Random();
         }
         catch (Exception ex) {
             System.err.println(ex);
