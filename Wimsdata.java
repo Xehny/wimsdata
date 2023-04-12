@@ -3,20 +3,18 @@ import java.util.*;
 
 class Wimsdata {
     public static void main (String[] args) {
-        if (args.length != 4) {
-            System.out.println("Usage: Wimsdata <bottles> <racks> <imports> <exports>");
+        if (args.length != 2) {
+            System.out.println("Usage: Wimsdata <bottles> <racks>");
             return;
         }
         
-        int bottles, racks, imports, exports;
+        int bottles, racks;
 
         try {
             bottles = Integer.parseInt(args[0]);
             racks = Integer.parseInt(args[1]);
-            imports = Integer.parseInt(args[2]);
-            exports = Integer.parseInt(args[3]);
 
-            if (bottles < 1 || racks < 1 || imports < 1 || exports < 1) {
+            if (bottles < 1 || racks < 1) {
                 System.err.println("Error: Arguments must be greater than 0");
                 return;
             }
@@ -26,15 +24,15 @@ class Wimsdata {
             return;
         }
 
-        genBottles(bottles, racks, imports, exports);
+        genBottles(bottles, racks);
     }
 
-    private static void genBottles(int bottles, int racks, int imports, int exports) {
+    private static void genBottles(int bottles, int racks) {
         try{
             BufferedWriter writer = new BufferedWriter(new FileWriter("bottles.csv"));
             Random rand = new Random();
 
-            int year, volume, variety, branch, rack, imp, exp;
+            int year, volume, variety, branch, rack, imp = 1000, exp = 1000;
             double alc, list, retail;
 
             for (int i = 0; i < bottles; i++) {
@@ -46,9 +44,21 @@ class Wimsdata {
                 variety = 1000 + rand.nextInt(32);
                 branch = 1000 + rand.nextInt(120);
                 rack = 1000 + rand.nextInt(racks);
-                imp = 1000 + rand.nextInt(imports);
-                exp = 1000 + rand.nextInt(exports);
-                writer.write(String.valueOf(year) + ',' + String.valueOf(volume) + ',' + String.valueOf(alc) + ',' + String.valueOf(list) + ',' + String.valueOf(retail) + ',' + String.valueOf(variety) + ',' + String.valueOf(branch) + ',' + String.valueOf(rack) + ',' + String.valueOf(imp) + ',' + String.valueOf(exp));
+
+                writer.write(String.valueOf(year) + ',' + String.valueOf(volume) + ',' + String.valueOf(alc) + ',' + String.valueOf(list) + ',' + String.valueOf(retail) + ',' + String.valueOf(variety) + ',' + String.valueOf(branch) + ',' + String.valueOf(rack) + ',' + String.valueOf(imp) + ',');
+                
+                if (rand.nextDouble() < 0.05) {
+                    writer.write("NULL");
+                }
+                else if (rand.nextDouble() < 0.25) {
+                    writer.write(String.valueOf(exp));
+                    exp += 1;
+                }
+                else {
+                    writer.write(String.valueOf(exp));
+                }
+
+                writer.newLine();
             }
             
             writer.close();
