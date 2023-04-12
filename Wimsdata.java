@@ -6,6 +6,7 @@ class Wimsdata {
     private static int racks;
     private static int imp = 1000;
     private static int exp = 1000;
+    private static List<String> dates = new ArrayList<>();
 
     public static void main (String[] args) {
         if (args.length != 2) {
@@ -27,12 +28,53 @@ class Wimsdata {
             return;
         }
 
+        genDates();
         genBottles();
         genRacks();
-        genImports();
-        genExports();
+        //genImports();
+        //genExports();
+    }
 
-        return;
+    public static void genDates() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("dates.csv"));
+            String date;
+
+            for (int year = 2020; year < 2023; year++) {
+                for (int month = 1; month < 13; month++) {
+                    for (int day = 1; day < 32; day++) {
+                        date = String.valueOf(year) + '/' + String.valueOf(month) + '/' + String.valueOf(day);
+                        dates.add(date);
+                        
+                        writer.write(date);
+                        writer.newLine();
+
+                        if (day == 28 && month == 2 && year != 2020) {
+                            day = 1;
+                            break;
+                        }
+                        else if (day == 29 && month == 2 && year == 2020) {
+                            day = 1;
+                            break;
+                        }
+                        else if (day == 30 && (month == 4 || month == 6 || month == 9 || month == 11)) {
+                            day = 1;
+                            break;
+                        }
+                        else if (day == 31) {
+                            day = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            writer.close();
+        }
+        catch (Exception ex) {
+            System.err.println(ex);
+            System.exit(0);
+        }
     }
 
     private static void genBottles() {
@@ -57,7 +99,7 @@ class Wimsdata {
                 if (rand.nextDouble() < 0.05) {
                     writer.write("NULL");
                 }
-                else if (rand.nextDouble() < 0.25) {
+                else if (rand.nextDouble() < 0.20) {
                     writer.write(String.valueOf(exp));
                     exp += 1;
                 }
@@ -65,7 +107,7 @@ class Wimsdata {
                     writer.write(String.valueOf(exp));
                 }
 
-                if (rand.nextDouble() < 0.15) {
+                if (rand.nextDouble() < 0.10) {
                     imp += 1;
                 }
 
@@ -119,44 +161,12 @@ class Wimsdata {
 
             String ordered, arrived;
             double cost;
-            int supplier, year, month, day;
+            int supplier, date;
 
             for (int i = 0; i < imp; i++) {
-                year = 2020 + rand.nextInt(3);
-                month = 1 + rand.nextInt(12);
-
-                if (month == 2) {
-                    day = 1 + rand.nextInt(28);
-                }
-                else if (month == 4 || month == 6 || month == 9 || month == 11) {
-                    day = 1 + rand.nextInt(30);
-                }
-                else {
-                    day = 1 + rand.nextInt(31);
-                }
-
-                ordered = String.valueOf(year) + '/' + String.valueOf(month) + '/' + String.valueOf(day);
-                day += 5 + rand.nextInt(10);
-
-                if (day > 28 && month == 2) {
-                    month += 1;
-                    day -= 28;
-                }
-                else if (day > 30 && (month == 4 || month == 6 || month == 9 || month == 11)) {
-                    month += 1;
-                    day -= 30;
-                }
-                else if (day > 31) {
-                    if (month == 12) {
-                        year += 1;
-                        month = 0;
-                    }
-
-                    month += 1;
-                    day -= 31;
-                }
-
-                arrived = String.valueOf(year) + '/' + String.valueOf(month) + '/' + String.valueOf(day);
+                date = rand.nextInt(dates.size() - 14);
+                ordered = dates.get(date);
+                arrived = dates.get(date + 5 + rand.nextInt(10));
                 cost = Math.round((10 + (rand.nextDouble() * 20)) * 100.0) / 100.0;
                 supplier = 1000 + rand.nextInt(40);
 
