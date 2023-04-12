@@ -29,10 +29,10 @@ class Wimsdata {
         }
 
         genDates();
-        genBottles();
         genRacks();
-        //genImports();
-        //genExports();
+        genImports();
+        genExports();
+        genBottles();
     }
 
     public static void genDates() {
@@ -82,7 +82,7 @@ class Wimsdata {
             BufferedWriter writer = new BufferedWriter(new FileWriter("bottles.csv"));
             Random rand = new Random();
 
-            int year, volume, variety, branch;
+            int year, volume, variety, brand;
             double alc, list, retail;
 
             for (int i = 0; i < bottles; i++) {
@@ -92,9 +92,9 @@ class Wimsdata {
                 list = Math.round((5 + (rand.nextDouble() * 120)) * 100.0) / 100.0;
                 retail = Math.round((5 + (list * 1.2)) * 100.0) / 100.0;
                 variety = 1000 + rand.nextInt(32);
-                branch = 1000 + rand.nextInt(120);
+                brand = 1000 + rand.nextInt(100);
 
-                writer.write(String.valueOf(year) + ',' + String.valueOf(volume) + ',' + String.valueOf(alc) + ',' + String.valueOf(list) + ',' + String.valueOf(retail) + ',' + String.valueOf(variety) + ',' + String.valueOf(branch) + ',' + String.valueOf(imp) + ',');
+                writer.write(String.valueOf(year) + ',' + String.valueOf(volume) + ',' + String.valueOf(alc) + ',' + String.valueOf(list) + ',' + String.valueOf(retail) + ',' + String.valueOf(variety) + ',' + String.valueOf(brand) + ',' + String.valueOf(imp) + ',');
 
                 if (rand.nextDouble() < 0.05) {
                     writer.write("NULL");
@@ -159,18 +159,16 @@ class Wimsdata {
             BufferedWriter writer = new BufferedWriter(new FileWriter("imports.csv"));
             Random rand = new Random();
 
-            String ordered, arrived;
             double cost;
-            int supplier, date;
+            int ordered, arrived, supplier;
 
             for (int i = 0; i < imp; i++) {
-                date = rand.nextInt(dates.size() - 14);
-                ordered = dates.get(date);
-                arrived = dates.get(date + 5 + rand.nextInt(10));
+                ordered = 1000 + rand.nextInt(dates.size() - 14);
+                arrived = ordered + 5 + rand.nextInt(10);
                 cost = Math.round((10 + (rand.nextDouble() * 20)) * 100.0) / 100.0;
                 supplier = 1000 + rand.nextInt(40);
 
-                writer.write(ordered + ',' + arrived + ',' + String.valueOf(cost) + ',' + String.valueOf(supplier));
+                writer.write(String.valueOf(ordered) + ',' + String.valueOf(arrived) + ',' + String.valueOf(cost) + ',' + String.valueOf(supplier));
                 writer.newLine();
             }
 
@@ -186,6 +184,21 @@ class Wimsdata {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("exports.csv"));
             Random rand = new Random();
+
+            double cost;
+            int ordered, arrived, location;
+
+            for (int i = 0; i < exp; i++) {
+                ordered = 1000 + rand.nextInt(dates.size() - 14);
+                arrived = ordered + 5 + rand.nextInt(10);
+                cost = Math.round((10 + (rand.nextDouble() * 20)) * 100.0) / 100.0;
+                location = 1000 + rand.nextInt(150);
+
+                writer.write(String.valueOf(ordered) + ',' + String.valueOf(arrived) + ',' + String.valueOf(cost) + ',' + String.valueOf(location));
+                writer.newLine();
+            }
+
+            writer.close();
         }
         catch (Exception ex) {
             System.err.println(ex);
