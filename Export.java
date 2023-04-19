@@ -10,9 +10,9 @@ public class Export {
     public Export(List<String> dates, int seq) {
         id = 1000 + seq;
         orderedDate = 1000 + rand.nextInt(dates.size() - 14);
-        orderedDateStr = dates.get(orderedDate - 1000);
+        //orderedDateStr = dates.get(orderedDate - 1000);
         shippedDate = shippedDate + 5 + rand.nextInt(10);
-        shippedDateStr = dates.get(shippedDate - 1000);
+        //shippedDateStr = dates.get(shippedDate - 1000);
         cost = Math.round((10 + (rand.nextDouble() * 20)) * 100.0) / 100.0;
         location = 1000 + rand.nextInt(100);
     }
