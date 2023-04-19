@@ -1,13 +1,14 @@
 import java.util.Random;
 
 public class Rack {
-    private int size, chill;
+    private int id, size, chill;
     private int[][] grid;
     private String name;
     private Random rand = new Random();
 
-    public Rack(int num, int s) {
-        name = "\'Rack " + String.valueOf(num + 1) + "\'";
+    public Rack(int seq, int s) {
+        id = seq + 1000;
+        name = "\'Rack " + String.valueOf(seq + 1) + "\'";
         size = s;
         grid = new int[s][];
 
@@ -25,6 +26,10 @@ public class Rack {
 
     public String toString() {
         return name + ',' + String.valueOf(size) + ',' + String.valueOf(size) + ',' + String.valueOf(chill);
+    }
+
+    public int getID() {
+        return id;
     }
 
     public int getSize() {

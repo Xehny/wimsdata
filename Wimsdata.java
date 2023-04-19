@@ -2,10 +2,13 @@ import java.io.*;
 import java.util.*;
 
 class Wimsdata {
-    private static int bottles, racks, imp = 1000, exp = 1000;
+    private static int bottles, racks;
     private static List<String> dates = new ArrayList<>();
     private static List<Bottle> listBottles = new ArrayList<>();
     private static List<Rack> listRacks = new ArrayList<>();
+    private static List<Import> listImports = new ArrayList<>();
+    private static List<Export> listExports = new ArrayList<>();
+    private static Random rand = new Random();
 
     public static void main (String[] args) {
         if (args.length != 2) {
@@ -29,9 +32,10 @@ class Wimsdata {
 
         genDates();
         genRacks();
+        genBottles();
         genImports();
         genExports();
-        genBottles();
+        
     }
 
     public static void genDates() {
@@ -76,20 +80,6 @@ class Wimsdata {
         }
     }
 
-    private static void genBottles() {
-        try{
-            for (int i = 0; i < bottles; i++) {
-                Bottle bottle = new Bottle();
-                listBottles.add(bottle);
-                System.out.println(bottle.toString());
-            }
-        }
-        catch (Exception ex) {
-            System.err.println(ex);
-            System.exit(0);
-        }
-    }
-
     private static void genRacks() {
         try {
             int length = (int) Math.sqrt((bottles * 0.10) / racks);
@@ -106,25 +96,36 @@ class Wimsdata {
         }
     }
 
+    private static void genBottles() {
+        try{
+            for (int i = 0; i < bottles; i++) {
+                Bottle bottle = new Bottle(i);
+                listBottles.add(bottle);
+                System.out.println(bottle.toString());
+            }
+        }
+        catch (Exception ex) {
+            System.err.println(ex);
+            System.exit(0);
+        }
+    }
+
     private static void genImports() {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("imports.csv"));
-            Random rand = new Random();
+            int seq = 0;
+            Import imp = new Import(dates, seq);
+            listImports.add(imp);
 
-            double cost;
-            int ordered, arrived, supplier;
+            for (int i = 0; i < bottles; i++) {
+                listBottles.get(i).setImport(imp);
+                double r = rand.nextDouble();
 
-            for (int i = 0; i < imp; i++) {
-                ordered = 1000 + rand.nextInt(dates.size() - 14);
-                arrived = ordered + 5 + rand.nextInt(10);
-                cost = Math.round((10 + (rand.nextDouble() * 20)) * 100.0) / 100.0;
-                supplier = 1000 + rand.nextInt(40);
-
-                writer.write(String.valueOf(ordered) + ',' + String.valueOf(arrived) + ',' + String.valueOf(cost) + ',' + String.valueOf(supplier));
-                writer.newLine();
+                if (r < 0.10) {
+                    seq += 1;
+                    imp = new Import(dates, seq);
+                    listImports.add(imp);
+                }
             }
-
-            writer.close();
         }
         catch (Exception ex) {
             System.err.println(ex);
@@ -134,23 +135,41 @@ class Wimsdata {
 
     private static void genExports() {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("exports.csv"));
-            Random rand = new Random();
+            int col = 0, row = 0, seq = 0;
+            Rack rack = null;
+            Export exp = new Export(dates, seq);
+            listExports.add(exp);
 
-            double cost;
-            int ordered, arrived, location;
+            while (listBottles.size() != 0) {
+                Bottle bottle = listBottles.get(rand.nextInt(listBottles.size()));
+                double r = rand.nextDouble();
 
-            for (int i = 0; i < exp; i++) {
-                ordered = 1000 + rand.nextInt(dates.size() - 14);
-                arrived = ordered + 5 + rand.nextInt(10);
-                cost = Math.round((10 + (rand.nextDouble() * 20)) * 100.0) / 100.0;
-                location = 1000 + rand.nextInt(150);
+                if (r < 0.95) {
+                    if (bottle.getImport().getDate() < exp.getDate()) {
+                        bottle.setExport(exp);
+                        listBottles.remove(bottle);
 
-                writer.write(String.valueOf(ordered) + ',' + String.valueOf(arrived) + ',' + String.valueOf(cost) + ',' + String.valueOf(location));
-                writer.newLine();
+                        r = rand.nextDouble();
+                        if (r < 0.15) {
+                            seq += 1;
+                            exp = new Export(dates, seq);
+                            listExports.add(exp);
+                        }
+                    }
+                }
+                else {
+                    Boolean space = false;
+                    while (space == false) {
+                        rack = listRacks.get(rand.nextInt(listRacks.size()));
+                        col = rand.nextInt(rack.getSize() + 1);
+                        row = rand.nextInt(rack.getSize() + 1);
+                        space = rack.checkPos(col, row);
+                    }
+                    
+                    bottle.setRack(rack.getID(), col, row);
+                    listBottles.remove(bottle);
+                }
             }
-
-            writer.close();
         }
         catch (Exception ex) {
             System.err.println(ex);

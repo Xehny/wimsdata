@@ -1,11 +1,14 @@
 import java.util.Random;
 
 public class Bottle {
-    private int year, volume, variety, brand, imp, exp;
+    private int id, year, volume, variety, brand, rack = 0, col, row;
     private double alc, list, retail;
+    private Import imp;
+    private Export exp;
     private Random rand = new Random();
 
-    public Bottle() {
+    public Bottle(int seq) {
+        id = 1000 + seq;
         year = 1990 + rand.nextInt(30);
         volume = randVolume();
         alc = Math.round((3 + (rand.nextDouble() * 17)) * 100.0) / 100.0;
@@ -16,7 +19,35 @@ public class Bottle {
     }
 
     public String toString() {
-        return String.valueOf(year) + ',' + String.valueOf(volume) + ',' + String.valueOf(alc) + ',' + String.valueOf(list) + ',' + String.valueOf(retail) + ',' + String.valueOf(variety) + ',' + String.valueOf(brand) + ',' + String.valueOf(imp) + ',' + String.valueOf(exp);
+        String str = String.valueOf(year) + ',' + String.valueOf(volume) + ',' + String.valueOf(alc) + ',' + String.valueOf(list) + ',' + String.valueOf(retail) + ',' + String.valueOf(variety) + ',' + String.valueOf(brand) + ',';
+        if (rack == 0) {
+            return str += "NULL,NULL,NULL,"  + String.valueOf(imp) + ',' + String.valueOf(exp);
+        }
+        else {
+            return str += String.valueOf(rack) + ',' + String.valueOf(col) + ',' + String.valueOf(row) + ',' + String.valueOf(imp.getID()) + ",NULL";
+        }
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    public Import getImport() {
+        return imp;
+    }
+
+    public void setRack(int rack, int col, int row) {
+        this.rack = rack;
+        this.col = col;
+        this.row = row;
+    }
+
+    public void setImport(Import imp) {
+        this.imp = imp;
+    }
+
+    public void setExport(Export exp) {
+        this.exp = exp;
     }
 
     private int randVolume() {
