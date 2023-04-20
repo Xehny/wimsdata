@@ -21,7 +21,7 @@ public class Bottle {
     public String toString() {
         String str = String.valueOf(year) + ',' + String.valueOf(volume) + ',' + String.valueOf(alc) + ',' + String.valueOf(list) + ',' + String.valueOf(retail) + ',' + String.valueOf(variety) + ',' + String.valueOf(brand) + ',';
         if (rack == 0) {
-            return str += "NULL,NULL,NULL,"  + String.valueOf(imp) + ',' + String.valueOf(exp);
+            return str += "NULL,NULL,NULL,"  + String.valueOf(imp.getID()) + ',' + String.valueOf(exp.getID());
         }
         else {
             return str += String.valueOf(rack) + ',' + String.valueOf(col) + ',' + String.valueOf(row) + ',' + String.valueOf(imp.getID()) + ",NULL";

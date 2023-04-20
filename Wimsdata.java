@@ -46,7 +46,7 @@ class Wimsdata {
             for (int year = 2020; year < 2023; year++) {
                 for (int month = 1; month < 13; month++) {
                     for (int day = 1; day < 32; day++) {
-                        date = String.valueOf(year) + '/' + String.valueOf(month) + '/' + String.valueOf(day);
+                        date = '\'' + String.valueOf(day) + '/' + String.valueOf(month) + '/' + String.valueOf(year) + '\'';
                         dates.add(date);
                         
                         writer.write(date);
