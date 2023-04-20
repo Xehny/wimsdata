@@ -1,100 +1,101 @@
-Château Margaux
-Château Latour
-Château Lafite Rothschild
-Château Mouton Rothschild
-Domaine de la Romanée-Conti
-Château Haut-Brion
-Château Cheval Blanc
-Château Palmer
-Château d'Yquem
-Domaine Leroy
-Domaine Leflaive
-Château Smith Haut Lafitte
-Château Pichon-Longueville
-Château Lynch-Bages
-Château Gruaud-Larose
-Château Cos d'Estournel
-Château Léoville-Las Cases
-Château Léoville-Poyferré
-Château Ducru-Beaucaillou
-Château Beychevelle
-Cloudy Bay Vineyards
-Felton Road Wines
-Villa Maria Estate
-Craggy Range Winery
-Ata Rangi Vineyard
-Pegasus Bay Winery
-Kumeu River Wines
-Gibbston Valley Wines
-Escarpment Vineyard
-Rippon Vineyard
-Dog Point Vineyard
-Martinborough Vineyard
-Amisfield Winery
-Elephant Hill Estate and Winery
-Neudorf Vineyards
-Framingham Wines
-Mudbrick Vineyard and Restaurant
-Te Mata Estate Winery
-Palliser Estate Wines
-The Crater Rim Winery
-Bodegas Vega Sicilia
-Bodegas Torres
-Bodegas Emilio Moro
-Bodegas Muga
-Bodegas Artadi
-Bodegas Marqués de Riscal
-Bodegas Ramón Bilbao
-Bodegas Faustino
-Bodegas Protos
-Bodegas Abadal
-Bodegas LAN
-Bodegas Valdemar
-Bodegas Martín Códax
-Bodegas Montecillo
-Robert Mondavi Winery
-Chateau Montelena Winery
-Opus One Winery
-Stag's Leap Wine Cellars
-Silver Oak Cellars
-Harlan Estate Winery
-Screaming Eagle Winery and Vineyards
-Duckhorn Vineyards
-Ridge Vineyards
-Caymus Vineyards
-Beaulieu Vineyard
-Chateau Ste. Michelle
-Quinta do Crasto
-Taylor's Port
-Casa Ferreirinha
-Quinta do Noval
-Symington Family Estates
-Herdade do Esporão
-Quinta de Vale Meão
-Penfolds
-Henschke
-d'Arenberg
-Torbreck Vintners
-Tyrrell's Wines
-Yalumba
-Leeuwin Estate
-Vasse Felix
-Jacobs Creek
-Wolf Blass
-Bodega Catena Zapata
-Bodegas Salentein
-Trapiche
-Bodega Norton
-Achával-Ferrer Winery
-Bodega Colomé
-Luigi Bosca Winery
-Bodega Chacra
-Alta Vista Wines
-Weingut Dr. Loosen
-Weingut Egon Müller-Scharzhof
-Schloss Johannisberg
-Weingut Fritz Haag
-Weingut Keller
-Weingut Dönnhoff
-Weingut JJ Prüm
-Weingut Robert Weil
+wbName,wbCountryOriginID
+Château Margaux,1001
+Château Latour,1001
+Château Lafite Rothschild,1001
+Château Mouton Rothschild,1001
+Domaine de la Romanée-Conti,1001
+Château Haut-Brion,1001
+Château Cheval Blanc,1001
+Château Palmer,1001
+Château d'Yquem,1001
+Domaine Leroy,1001
+Domaine Leflaive,1001
+Château Smith Haut Lafitte,1001
+Château Pichon-Longueville,1001
+Château Lynch-Bages,1001
+Château Gruaud-Larose,1001
+Château Cos d'Estournel,1001
+Château Léoville-Las Cases,1001
+Château Léoville-Poyferré,1001
+Château Ducru-Beaucaillou,1001
+Château Beychevelle,1001
+Cloudy Bay Vineyards,1000
+Felton Road Wines,1000
+Villa Maria Estate,1000
+Craggy Range Winery,1000
+Ata Rangi Vineyard,1000
+Pegasus Bay Winery,1000
+Kumeu River Wines,1000
+Gibbston Valley Wines,1000
+Escarpment Vineyard,1000
+Rippon Vineyard,1000
+Dog Point Vineyard,1000
+Martinborough Vineyard,1000
+Amisfield Winery,1000
+Elephant Hill Estate and Winery,1000
+Neudorf Vineyards,1000
+Framingham Wines,1000
+Mudbrick Vineyard and Restaurant,1000
+Te Mata Estate Winery,1000
+Palliser Estate Wines,1000
+The Crater Rim Winery,1000
+Bodegas Vega Sicilia,1002
+Bodegas Torres,1002
+Bodegas Emilio Moro,1002
+Bodegas Muga,1002
+Bodegas Artadi,1002
+Bodegas Marqués de Riscal,1002
+Bodegas Ramón Bilbao,1002
+Bodegas Faustino,1002
+Bodegas Protos,1002
+Bodegas Abadal,1002
+Bodegas LAN,1002
+Bodegas Valdemar,1002
+Bodegas Martín Códax,1002
+Bodegas Montecillo,1002
+Robert Mondavi Winery,1004
+Chateau Montelena Winery,1004
+Opus One Winery,1004
+Stag's Leap Wine Cellars,1004
+Silver Oak Cellars,1004
+Harlan Estate Winery,1004
+Screaming Eagle Winery and Vineyards,1004
+Duckhorn Vineyards,1004
+Ridge Vineyards,1004
+Caymus Vineyards,1004
+Beaulieu Vineyard,1004
+Chateau Ste. Michelle,1004
+Quinta do Crasto,1006
+Taylor's Port,1006
+Casa Ferreirinha,1006
+Quinta do Noval,1006
+Symington Family Estates,1006
+Herdade do Esporão,1006
+Quinta de Vale Meão,1006
+Penfolds,1005
+Henschke,1005
+d'Arenberg,1005
+Torbreck Vintners,1005
+Tyrrell's Wines,1005
+Yalumba,1005
+Leeuwin Estate,1005
+Vasse Felix,1005
+Jacobs Creek,1005
+Wolf Blass,1005
+Bodega Catena Zapata,1003
+Bodegas Salentein,1003
+Trapiche,1003
+Bodega Norton,1003
+Achával-Ferrer Winery,1003
+Bodega Colomé,1003
+Luigi Bosca Winery,1003
+Bodega Chacra,1003
+Alta Vista Wines,1003
+Weingut Dr. Loosen,1007
+Weingut Egon Müller-Scharzhof,1007
+Schloss Johannisberg,1007
+Weingut Fritz Haag,1007
+Weingut Keller,1007
+Weingut Dönnhoff,1007
+Weingut JJ Prüm,1007
+Weingut Robert Weil,1007

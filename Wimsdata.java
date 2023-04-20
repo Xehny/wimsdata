@@ -46,7 +46,7 @@ class Wimsdata {
             for (int year = 2020; year < 2023; year++) {
                 for (int month = 1; month < 13; month++) {
                     for (int day = 1; day < 32; day++) {
-                        date = '\'' + String.valueOf(day) + '/' + String.valueOf(month) + '/' + String.valueOf(year) + '\'';
+                        date = '"' + String.valueOf(day) + '/' + String.valueOf(month) + '/' + String.valueOf(year) + '"';
                         dates.add(date);
                         
                         writer.write(date);
@@ -212,15 +212,9 @@ class Wimsdata {
 
     private static void writeCSV() {
         try{
-            BufferedWriter writer = new BufferedWriter(new FileWriter("bottles.csv"));
-
-            for (Bottle bottle : listBottles) {
-                writer.write(bottle.toString());
-                writer.newLine();
-            }
-            writer.close();
-
-            writer = new BufferedWriter(new FileWriter("racks.csv"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("racks.csv"));
+            writer.write("rName,rRowNo,rColumnNo,rIsChilled");
+            writer.newLine();
 
             for (Rack rack : listRacks) {
                 writer.write(rack.toString());
@@ -228,7 +222,19 @@ class Wimsdata {
             }
             writer.close();
 
+            writer = new BufferedWriter(new FileWriter("bottles.csv"));
+            writer.write("bYear,bVolume,bAlcoholPercentage,bListCost,bRetailCost,bVarietyID,bBrandID,bRackID,bColumnPosition,bRowPosition,bImportID,bExportID");
+            writer.newLine();
+
+            for (Bottle bottle : listBottles) {
+                writer.write(bottle.toString());
+                writer.newLine();
+            }
+            writer.close();
+
             writer = new BufferedWriter(new FileWriter("imports.csv"));
+            writer.write("iDateOrdered,iDateArrived,iShippingCost,iSupplierID");
+            writer.newLine();
 
             for (Import imp : listImports) {
                 writer.write(imp.toString());
@@ -237,6 +243,8 @@ class Wimsdata {
             writer.close();
 
             writer = new BufferedWriter(new FileWriter("exports.csv"));
+            writer.write("eDateOrdered,eDateShipped,eShippingCost,eLocationID");
+            writer.newLine();
 
             for (Export exp : listExports) {
                 writer.write(exp.toString());
