@@ -8,7 +8,7 @@ public class Rack {
 
     public Rack(int seq, int s) {
         id = seq + 1000;
-        name = "\'Rack " + String.valueOf(seq + 1) + "\'";
+        name = "Rack " + String.valueOf(seq + 1);
         size = s;
         grid = new int[s][s];
 

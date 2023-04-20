@@ -223,7 +223,7 @@ class Wimsdata {
             writer.close();
 
             writer = new BufferedWriter(new FileWriter("bottles.csv"));
-            writer.write("bYear,bVolume,bAlcoholPercentage,bListCost,bRetailCost,bVarietyID,bBrandID,bRackID,bColumnPosition,bRowPosition,bImportID,bExportID");
+            writer.write("bYear,bBottleVolumeID,bAlcoholPercentage,bListCost,bRetailCost,bVarietyID,bWineBrandID,bRackID,bColumnPosition,bRowPosition,bImportID,bExportID");
             writer.newLine();
 
             for (Bottle bottle : listBottles) {
