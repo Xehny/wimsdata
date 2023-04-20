@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 class Wimsdata {
-    private static int bottles, racks;
+    private static int bottles, racks, firstImp;
     private static List<String> dates = new ArrayList<>();
     private static List<Bottle> listBottles = new ArrayList<>(), listBotTemp = new ArrayList<>();
     private static List<Rack> listRacks = new ArrayList<>();
@@ -82,7 +82,7 @@ class Wimsdata {
 
     private static void genRacks() {
         //try {
-            int length = (int) Math.sqrt((bottles * 0.10) / racks);
+            int length = (int) Math.sqrt((bottles * 0.20) / racks);
 
             for (int i = 0; i < racks; i++) {
                 Rack rack = new Rack(i, length);
@@ -134,26 +134,51 @@ class Wimsdata {
 
     private static void genExports() {
         //try {
+            firstImp = dates.size() + 1000;
+            for (Bottle b : listBotTemp) {
+                if (b.getImport().getDate() < firstImp) {
+                    firstImp = b.getImport().getDate();
+                }
+            }
+
             int col = 0, row = 0, seq = 0;
             Rack rack = null;
-            Export exp = new Export(dates, seq);
+            Export exp = new Export(dates, seq, firstImp);
             listExports.add(exp);
 
             while (listBotTemp.size() != 0) {
                 Bottle bottle = listBotTemp.get(rand.nextInt(listBotTemp.size()));
                 double r = rand.nextDouble();
+                //System.out.println("reached");
 
                 if (r < 0.95) {
-                    if (bottle.getImport().getDate() < exp.getDate()) {
-                        bottle.setExport(exp);
-                        listBotTemp.remove(bottle);
-
-                        r = rand.nextDouble();
-                        if (r < 0.15) {
+                    while (true) {
+                        if (firstImp >= exp.getDate()) {
                             seq += 1;
-                            exp = new Export(dates, seq);
+                            exp = new Export(dates, seq, firstImp);
                             listExports.add(exp);
+                            //System.out.println("Breaking");
+                            //System.out.println(String.valueOf(exp.getDate()));
+                            break;
                         }
+                        else if (bottle.getImport().getDate() < exp.getDate()) {
+                            bottle.setExport(exp);
+                            listBotTemp.remove(bottle);
+    
+                            r = rand.nextDouble();
+                            if (r < 0.15) {
+                                seq += 1;
+                                exp = new Export(dates, seq, firstImp);
+                                listExports.add(exp);
+                                //System.out.println(String.valueOf(exp.getDate()));
+                            }
+
+                            //System.out.println("Breaking");
+                            break;
+                        }
+                        System.out.println(listBotTemp.size());
+
+                        bottle = listBotTemp.get(rand.nextInt(listBotTemp.size()));
                     }
                 }
                 else {
@@ -163,12 +188,20 @@ class Wimsdata {
                         col = rand.nextInt(rack.getSize());
                         row = rand.nextInt(rack.getSize());
                         space = rack.checkPos(col, row);
-                        System.out.println("Still false " + String.valueOf(seq) + ' ' + String.valueOf(rack.getID()) + ' ' + String.valueOf(col) + ' ' + String.valueOf(row));
                     }
                     
                     bottle.setRack(rack.getID(), col + 1, row + 1);
                     listBotTemp.remove(bottle);
                 }
+
+                firstImp = dates.size() + 1000;
+                for (Bottle b : listBotTemp) {
+                    if (b.getImport().getDate() < firstImp) {
+                        firstImp = b.getImport().getDate();
+                    }
+                }
+
+                //System.out.println(firstImp);
             }
         /* }
         catch (Exception ex) {

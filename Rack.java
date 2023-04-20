@@ -10,11 +10,11 @@ public class Rack {
         id = seq + 1000;
         name = "\'Rack " + String.valueOf(seq + 1) + "\'";
         size = s;
-        grid = new int[s][];
+        grid = new int[s][s];
 
-        for (int i = 0; i < s; i++) {
+        /* for (int i = 0; i < s; i++) {
             grid[i] = new int[s];
-        }
+        } */
 
         if (rand.nextDouble() < 0.15) {
             chill = 1;

@@ -7,18 +7,18 @@ public class Export {
     private double cost;
     private Random rand = new Random();
 
-    public Export(List<String> dates, int seq) {
+    public Export(List<String> dates, int seq, int firstImp) {
         id = 1000 + seq;
-        orderedDate = 1000 + rand.nextInt(dates.size() - 14);
-        //orderedDateStr = dates.get(orderedDate - 1000);
-        shippedDate = shippedDate + 5 + rand.nextInt(10);
-        //shippedDateStr = dates.get(shippedDate - 1000);
+        orderedDate = firstImp + rand.nextInt(dates.size() - (firstImp - 986));
+        orderedDateStr = dates.get(orderedDate - 1000);
+        shippedDate = orderedDate + 5 + rand.nextInt(10);
+        shippedDateStr = dates.get(shippedDate - 1000);
         cost = Math.round((10 + (rand.nextDouble() * 20)) * 100.0) / 100.0;
         location = 1000 + rand.nextInt(100);
     }
 
     public String toString() {
-        return String.valueOf(orderedDate) + ',' + String.valueOf(shippedDate) + ',' + String.valueOf(cost) + ',' + String.valueOf(location);
+        return String.valueOf(orderedDateStr) + ',' + String.valueOf(shippedDateStr) + ',' + String.valueOf(cost) + ',' + String.valueOf(location);
     }
 
     public int getID() {
