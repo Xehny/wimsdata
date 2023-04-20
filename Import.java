@@ -14,7 +14,7 @@ public class Import {
         arrivedDate = orderedDate + 5 + rand.nextInt(10);
         arrivedDateStr = dates.get(arrivedDate - 1000);
         cost = Math.round((10 + (rand.nextDouble() * 20)) * 100.0) / 100.0;
-        supplier = 1000 + rand.nextInt(40);
+        supplier = 1000 + rand.nextInt(5);
     }
     
     public String toString() {

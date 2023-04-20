@@ -14,7 +14,7 @@ public class Export {
         shippedDate = orderedDate + 5 + rand.nextInt(10);
         shippedDateStr = dates.get(shippedDate - 1000);
         cost = Math.round((10 + (rand.nextDouble() * 20)) * 100.0) / 100.0;
-        location = 1000 + rand.nextInt(100);
+        location = 1000 + rand.nextInt(10);
     }
 
     public String toString() {
